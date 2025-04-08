@@ -1,6 +1,8 @@
 package com.challenge.poscacheservice.model;
 
-import jakarta.persistence.Id;
+//import jakarta.persistence.Id;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +19,10 @@ public class PuntoDeVenta implements Serializable {
     @Id
     private Long id;
     private String nombre;
+
+    //Agregué esto porque no agarra lombok
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
 }
