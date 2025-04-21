@@ -1,6 +1,8 @@
 package com.challenge.poscacheservice.init;
 
+import com.challenge.poscacheservice.model.CostoEntrePuntos;
 import com.challenge.poscacheservice.model.PuntoDeVenta;
+import com.challenge.poscacheservice.repository.CostoEntrePuntosRepository;
 import com.challenge.poscacheservice.repository.PuntoDeVentaRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -9,12 +11,21 @@ import org.springframework.stereotype.Component;
 public class DataInitializer {
 
     private final PuntoDeVentaRepository puntoDeVentaRepository;
+    private final CostoEntrePuntosRepository costoEntrePuntosRepository;
 
-    public DataInitializer(PuntoDeVentaRepository puntoDeVentaRepository) {
+
+    public DataInitializer(PuntoDeVentaRepository puntoDeVentaRepository,
+                           CostoEntrePuntosRepository costoEntrePuntosRepository) {
         this.puntoDeVentaRepository = puntoDeVentaRepository;
+        this.costoEntrePuntosRepository = costoEntrePuntosRepository;
     }
 
     @PostConstruct
+    public void precargarDatos() {
+        precargarPuntosDeVenta();
+        precargarCostosEntrePuntos();
+    }
+
     public void precargarPuntosDeVenta() {
         if (puntoDeVentaRepository.count() == 0) {
             puntoDeVentaRepository.save(new PuntoDeVenta(1L, "CABA"));
@@ -30,5 +41,18 @@ public class DataInitializer {
 
             System.out.println("Puntos de venta precargados en Redis");
         }
+    }
+
+    private void precargarCostosEntrePuntos() {
+        if (costoEntrePuntosRepository.count() == 0) {
+            String id = generarIdCompuesto(1L, 2L);
+            CostoEntrePuntos costo = new CostoEntrePuntos(id, 1L, 2L, 2);
+            costoEntrePuntosRepository.save(costo);
+            System.out.println("Costo 1_2 precargado en Redis");
+        }
+    }
+
+    private String generarIdCompuesto(Long idA, Long idB) {
+        return (idA < idB ? idA + "_" + idB : idB + "_" + idA);
     }
 }
