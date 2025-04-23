@@ -34,4 +34,14 @@ public class CostoEntrePuntosService {
     public Iterable<CostoEntrePuntos> listarTodos() {
         return costoEntrePuntosRepository.findAll();
     }
+
+    public CostoEntrePuntos guardarCosto(Long idOrigen, Long idDestino, Integer costo) {
+        String id = generarIdCompuesto(idOrigen, idDestino);
+        CostoEntrePuntos nuevoCosto = new CostoEntrePuntos(id, idOrigen, idDestino, costo);
+        return costoEntrePuntosRepository.save(nuevoCosto);
+    }
+
+    private String generarIdCompuesto(Long idA, Long idB) {
+        return (idA < idB ? idA + "_" + idB : idB + "_" + idA);
+    }
 }
