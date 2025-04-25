@@ -1,12 +1,10 @@
 package com.challenge.poscacheservice.controller;
 
+import com.challenge.poscacheservice.dto.CostoEntrePuntosRequestDTO;
 import com.challenge.poscacheservice.model.CostoEntrePuntos;
 import com.challenge.poscacheservice.service.CostoEntrePuntosService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -27,4 +25,11 @@ public class CostoEntrePuntosController {
         return resultado.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PostMapping
+    public ResponseEntity<CostoEntrePuntos> crearCosto(@RequestBody CostoEntrePuntosRequestDTO dto) {
+        CostoEntrePuntos creado = costoEntrePuntosService.guardarCosto(dto.getIdOrigen(), dto.getIdDestino(), dto.getCosto());
+        return ResponseEntity.ok(creado);
+    }
+
 }
