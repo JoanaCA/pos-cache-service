@@ -5,6 +5,8 @@ import com.challenge.poscacheservice.repository.CostoEntrePuntosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,4 +46,18 @@ public class CostoEntrePuntosService {
     private String generarIdCompuesto(Long idA, Long idB) {
         return (idA < idB ? idA + "_" + idB : idB + "_" + idA);
     }
+
+    public List<CostoEntrePuntos> buscarConexionesDirectas(Long idOrigen) {
+        Iterable<CostoEntrePuntos> todosLosCostos = costoEntrePuntosRepository.findAll();
+        List<CostoEntrePuntos> conexionesDirectas = new ArrayList<>();
+
+        for (CostoEntrePuntos costo : todosLosCostos) {
+            if (costo.getIdOrigen().equals(idOrigen) || costo.getIdDestino().equals(idOrigen)) {
+                conexionesDirectas.add(costo);
+            }
+        }
+
+        return conexionesDirectas;
+    }
+
 }
