@@ -17,15 +17,9 @@ import java.util.List;
 @Schema(description = "Respuesta con la ruta más barata entre dos puntos de venta.")
 public class LowestCostResponse {
 
-    @Schema(
-            description = "Lista de IDs de los puntos de venta en el orden del recorrido",
-            example = "[1, 4, 5]"
-    )
+    @Schema(description = "Lista de IDs de los puntos de venta en el orden del recorrido", example = "[1, 4, 5]")
     private List<Long> ruta;
 
-    @Schema(
-            description = "Costo total para recorrer el camino",
-            example = "11"
-    )
+    @Schema(description = "Costo total para recorrer el camino", example = "11")
     private int costoTotal;
 }
