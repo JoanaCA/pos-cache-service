@@ -4,9 +4,12 @@ import com.challenge.poscacheservice.dto.LowestCostResponse;
 import com.challenge.poscacheservice.graph.Conexion;
 import com.challenge.poscacheservice.model.PuntoDeVenta;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
+/**
+ * Servicio responsable de construir el grafo en memoria y calcular
+ * la ruta con menor costo entre dos puntos de venta mediante el algoritmo de Dijkstra.
+ */
 @Service
 public class RutaService {
 
@@ -17,6 +20,8 @@ public class RutaService {
     /**
      * Inicializa el grafo en memoria a partir de la lista de puntos y conexiones.
      * Debe llamarse una vez, por ejemplo tras cargar tus datos iniciales.
+     * @param puntos lista de puntos de venta (nodos del grafo)
+     * @param conexiones lista de conexiones (aristas del grafo)
      */
     public void initGrafo(List<PuntoDeVenta> puntos, List<Conexion> conexiones) {
         // Crear una entrada vacía para cada punto
@@ -35,6 +40,9 @@ public class RutaService {
     /**
      * Ejecuta Dijkstra desde 'origenId' hasta 'destinoId' y devuelve
      * un DTO con la ruta de ids y el costo total mínimo.
+     * @param origenId ID del punto de venta origen
+     * @param destinoId ID del punto de venta destino
+     * @return DTO con la lista ordenada de IDs que componen la ruta y el costo total
      */
     public LowestCostResponse encontrarRutaMinima(Long origenId, Long destinoId) {
         // Distancias iniciales: infinito salvo el origen
@@ -83,7 +91,10 @@ public class RutaService {
         return new LowestCostResponse(ruta, costoTotal);
     }
 
-    // Clase interna para el PriorityQueue
+    /**
+     * Clase interna que representa un nodo con su distancia acumulada.
+     * Usada en la cola de prioridad para seleccionar el nodo con menor costo.
+     */
     private static class Nodo implements Comparable<Nodo> {
         Long id;
         int dist;

@@ -1,5 +1,6 @@
 package com.challenge.poscacheservice.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,32 +8,24 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * DTO que encapsula el resultado del cálculo de la ruta de costo mínimo.
- * <p>
- * Contiene la secuencia de IDs de puntos de venta que forman el camino de menor
- * costo y el costo total asociado. Devuelve en un endpoint REST
- * tras ejecutar el algoritmo de Dijkstra.
- * </p>
+ * Representa la respuesta al calcular el camino más barato entre dos puntos de venta.
+ * Contiene la lista ordenada de IDs del recorrido y el costo total acumulado.
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Respuesta con la ruta más barata entre dos puntos de venta.")
 public class LowestCostResponse {
 
-    /**
-     * Lista de IDs de puntos de venta que componen la ruta de menor costo.
-     * <p>
-     * El primer elemento es el ID del punto de origen, y el último, el del destino.
-     * Entre ambos, la secuencia refleja el camino encontrado por el algoritmo.
-     * </p>
-     */
+    @Schema(
+            description = "Lista de IDs de los puntos de venta en el orden del recorrido",
+            example = "[1, 4, 5]"
+    )
     private List<Long> ruta;
 
-    /**
-     * Costo acumulado total de la ruta calculada.
-     * <p>
-     * Suma de los pesos (costos) de cada conexión en la ruta.
-     * </p>
-     */
+    @Schema(
+            description = "Costo total para recorrer el camino",
+            example = "11"
+    )
     private int costoTotal;
 }

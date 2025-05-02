@@ -23,7 +23,13 @@ public class DataInitializer {
     private final CostoEntrePuntosRepository costoEntrePuntosRepository;
     private final RutaService rutaService;
 
-
+    /**
+     * Constructor con inyección de dependencias.
+     *
+     * @param puntoDeVentaRepository repositorio de puntos de venta
+     * @param costoEntrePuntosRepository repositorio de conexiones entre puntos
+     * @param rutaService servicio que maneja el grafo en memoria
+     */
     public DataInitializer(PuntoDeVentaRepository puntoDeVentaRepository,
                            CostoEntrePuntosRepository costoEntrePuntosRepository,
                            RutaService rutaService) {
