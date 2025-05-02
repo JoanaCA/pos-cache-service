@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class CostoEntrePuntos implements Serializable {
 
     @Id
-    private String id; // 
+    private String id; // s
 
     private Long idOrigen;
     private Long idDestino;

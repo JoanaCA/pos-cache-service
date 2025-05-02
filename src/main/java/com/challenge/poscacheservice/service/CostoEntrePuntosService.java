@@ -1,13 +1,12 @@
 package com.challenge.poscacheservice.service;
 
+import com.challenge.poscacheservice.graph.Conexion;
 import com.challenge.poscacheservice.model.CostoEntrePuntos;
 import com.challenge.poscacheservice.repository.CostoEntrePuntosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CostoEntrePuntosService {
@@ -59,5 +58,4 @@ public class CostoEntrePuntosService {
 
         return conexionesDirectas;
     }
-
 }
