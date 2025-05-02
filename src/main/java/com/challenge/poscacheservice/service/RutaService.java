@@ -2,7 +2,7 @@ package com.challenge.poscacheservice.service;
 
 import com.challenge.poscacheservice.dto.LowestCostResponse;
 import com.challenge.poscacheservice.graph.Conexion;
-import com.challenge.poscacheservice.graph.PuntoVenta;
+import com.challenge.poscacheservice.model.PuntoDeVenta;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,9 +18,9 @@ public class RutaService {
      * Inicializa el grafo en memoria a partir de la lista de puntos y conexiones.
      * Debe llamarse una vez, por ejemplo tras cargar tus datos iniciales.
      */
-    public void initGrafo(List<PuntoVenta> puntos, List<Conexion> conexiones) {
+    public void initGrafo(List<PuntoDeVenta> puntos, List<Conexion> conexiones) {
         // Crear una entrada vacía para cada punto
-        for (PuntoVenta p : puntos) {
+        for (PuntoDeVenta p : puntos) {
             grafo.put(p.getId(), new ArrayList<>());
         }
         // Agregar cada conexión; asumimos grafo no dirigido
